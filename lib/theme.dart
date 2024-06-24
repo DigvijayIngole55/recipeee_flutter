@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static const Color lightPink = Color(0xFFFFE6E6);
@@ -14,9 +15,25 @@ class AppTheme {
       secondary: softPink,
       background: lightPink,
     ),
+    textTheme: GoogleFonts.poppinsTextTheme().copyWith(
+      headlineLarge: GoogleFonts.poppins(
+        color: Colors.black,
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+      titleLarge: GoogleFonts.poppins(
+        color: Colors.black,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+      bodyLarge: GoogleFonts.poppins(
+        color: Colors.black,
+        fontSize: 16,
+      ),
+    ),
     appBarTheme: AppBarTheme(
       backgroundColor: lightPink,
-      titleTextStyle: TextStyle(
+      titleTextStyle: GoogleFonts.poppins(
         color: Colors.black,
         fontSize: 20,
         fontWeight: FontWeight.bold,
@@ -26,8 +43,8 @@ class AppTheme {
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
         backgroundColor: darkPurple,
-        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 24),
-        textStyle: TextStyle(fontSize: 18),
+        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+        textStyle: GoogleFonts.poppins(fontSize: 18),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
@@ -36,20 +53,13 @@ class AppTheme {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: darkPurple,
+        backgroundColor: softPink,
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        textStyle: TextStyle(fontSize: 16),
+        textStyle: GoogleFonts.poppins(fontSize: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
       ),
-    ),
-    textTheme: TextTheme(
-      headlineLarge: TextStyle(
-          color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
-      titleLarge: TextStyle(
-          color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-      bodyLarge: TextStyle(color: Colors.black, fontSize: 16),
     ),
   );
 }

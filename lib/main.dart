@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:receipeee/screens/homeScreen.dart';
+import 'package:receipeee/Pages/home_page.dart';
+import 'package:receipeee/Pages/ingredients_page.dart';
+import 'package:receipeee/Pages/result_page.dart';
 import 'providers/ingredient_provider.dart';
 import 'providers/recipe_provider.dart';
 import 'theme.dart';
@@ -23,7 +25,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => HomePage(),
-          // '/ingredients': (context) => IngredientsPage(),
+          '/ingredients': (context) => IngredientsPage(),
+          '/results': (context) => ResultsPage(),
           // '/recipe_suggestions': (context) => RecipeSuggestionsPage(),
         },
       ),

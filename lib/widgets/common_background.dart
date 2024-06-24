@@ -18,7 +18,7 @@ class CommonBackground extends StatelessWidget {
           ),
         ),
         Container(
-          color: Colors.black.withOpacity(0.3), // Transparent overlay
+          color: Colors.white.withOpacity(0.8), // Semi-transparent overlay
         ),
         child,
       ],
