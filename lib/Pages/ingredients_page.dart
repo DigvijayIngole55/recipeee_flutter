@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:receipeee/providers/ingredient_provider.dart';
+import 'package:receipeee/providers/recipe_provider.dart';
 import 'package:receipeee/theme.dart';
 import 'package:receipeee/widgets/common_background.dart';
 import 'package:receipeee/widgets/common_card_widget.dart';
@@ -15,6 +16,7 @@ class IngredientsPage extends StatefulWidget {
 class _IngredientsPageState extends State<IngredientsPage> {
   final TextEditingController _ingredientController = TextEditingController();
   bool _isLoading = false;
+  bool _isButtonLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +63,20 @@ class _IngredientsPageState extends State<IngredientsPage> {
                                     ?.copyWith(color: Colors.black),
                               ),
                               SizedBox(height: 20),
-                              ElevatedButton(
-                                onPressed: () =>
-                                    Provider.of<IngredientProvider>(context,
-                                            listen: false)
-                                        .pickImage(context),
-                                child: Text('Upload Image'),
+                              CommonElevatedButton(
+                                text: _isButtonLoading ? '' : 'Upload Image',
+                                onPressed: () async {
+                                  setState(() {
+                                    _isButtonLoading = true;
+                                  });
+                                  Provider.of<IngredientProvider>(context,
+                                          listen: false)
+                                      .pickImage(context);
+                                  setState(() {
+                                    _isButtonLoading = false;
+                                  });
+                                },
+                                isLoading: _isButtonLoading,
                               ),
                               SizedBox(height: 20),
                               TextField(
@@ -150,13 +160,30 @@ class _IngredientsPageState extends State<IngredientsPage> {
                               setState(() {
                                 _isLoading = true;
                               });
-                              // Simulate API call
-                              await Future.delayed(Duration(seconds: 10));
-                              setState(() {
-                                _isLoading = false;
-                              });
-                              Navigator.pushNamed(context, '/results');
+                              try {
+                                // Fetch recipes and navigate to the results page
+                                final ingredientProvider =
+                                    Provider.of<IngredientProvider>(context,
+                                        listen: false);
+                                final recipeProvider =
+                                    Provider.of<RecipeProvider>(context,
+                                        listen: false);
+
+                                await recipeProvider.fetchRecipes(
+                                    ingredientProvider.ingredients
+                                        .map((e) => e.name)
+                                        .toList());
+
+                                Navigator.pushNamed(context, '/results');
+                              } catch (e) {
+                                print(e);
+                              } finally {
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                              }
                             },
+                            isLoading: _isLoading,
                           ),
                         ),
                       ],

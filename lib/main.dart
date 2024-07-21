@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:receipeee/Pages/home_page.dart';
 import 'package:receipeee/Pages/ingredients_page.dart';
@@ -6,8 +7,9 @@ import 'package:receipeee/Pages/result_page.dart';
 import 'providers/ingredient_provider.dart';
 import 'providers/recipe_provider.dart';
 import 'theme.dart';
-
-void main() {
+  
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(MyApp());
 }
 
